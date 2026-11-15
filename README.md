@@ -32,6 +32,60 @@ CAM_URL=http://IP-DEL-TELEFONO:8080/video ./scripts/desplegar.sh
 
 La detección depende del ángulo y de la luz. Con el corredor mal encuadrado aparecen falsos positivos; la bitácora documenta las pruebas y los ajustes.
 
+<!-- ficha -->
+## Ficha de evaluación
+
+**Madurez global: 3.8/5**
+
+| Criterio | Nota | Evidencia |
+|---|---:|---|
+| Madurez | 4/5 | 38 pruebas, tres auditorías y trece hallazgos resueltos; sostiene de 10,3 a 14 fps en la placa. |
+| Reproducibilidad | 3/5 | Depende de una cámara IP, del encuadre del corredor y de la luz; el despliegue evita pip y sudo. |
+| Documentación | 4/5 | README, bitácora con las incidencias I-001 a I-013, datasheet y guía de desarrollador. |
+| Honestidad de límites | 5/5 | Declara que no identifica personas, que no es un sistema certificado y que el deep learning no era viable. |
+| Valor demostrativo | 4/5 | Convierte segmentación de fondo y tiempo al contacto en un semáforo comprensible, con latencia medida. |
+| Facilidad de despliegue | 3/5 | Un script configura y arranca el servicio; exigen URL de cámara y franja del corredor antes de operar. |
+
+Detector explicable y medido para un pasillo, con auditorías e incidencias documentadas. Adecuado para demostrar visión clásica en placa; insuficiente como sistema de seguridad real.
+
+## Lo que no funcionó
+
+### vigia-caminante-unoq — Un objeto que llenaba el cuadro quedaba verde
+
+El filtro descartaba los contornos con área relativa mayor a 0,7 para evitar falsos positivos, de modo que una persona muy cerca desaparecía del semáforo. Se dejó de descartar por tamaño, se fijó 0,95 como umbral de amenaza y se añadió un calentamiento de cinco frames para el arranque de MOG2.
+
+### vigia-caminante-unoq — El watchdog pisaba el estado recién escrito
+
+La rutina de vigilancia leía, modificaba y volvía a escribir el estado, sobrescribiendo actualizaciones frescas y produciendo parpadeos grises. Se implementó una operación compare-and-set, reemplazar_estado_si, que solo escribe si la versión leída sigue siendo la vigente. Es la incidencia I-011 de la bitácora.
+
+### vigia-caminante-unoq — Configuración concurrente rompía invariantes
+
+Las actualizaciones de ajustes desde la API podían intercalarse y dejar el estado con umbrales incoherentes entre sí. Se centralizó la escritura en actualizar_ajustes_si, con un único lock, y se agregó una prueba de ocho hilos sincronizados con Barrier. Es la incidencia I-013.
+
+### vigia-caminante-unoq — Deep learning descartado por el hardware
+
+Se evaluó un detector neuronal, pero la placa no tiene GPU ni acelerador, el disco ronda los 768 MB y la CPU no alcanzaba 10 fps a 1080×1920. Se optó por MOG2 por ser explicable y sostenible. La limitación está documentada: el sistema detecta movimiento, no personas.
+
+## Preguntas típicas
+
+**¿Identifica personas?**
+
+No. Detecta movimiento en el corredor y estima riesgo; no reconoce caras ni identidades.
+
+**¿Qué significa el ámbar?**
+
+Que algo crece en el corredor y el tiempo estimado al contacto bajó del primer umbral.
+
+**¿Cuánta CPU consume?**
+
+Analiza a 320 px y sostiene 10–14 fps en la placa con 190–230 MB de RSS.
+
+**¿Se puede usar de noche?**
+
+Sí, si la cámara tiene visión nocturna; el detector necesita algún contraste para separar el fondo.
+
+<!-- /ficha -->
+
 ## Documentación
 
 - [`docs/datasheet.md`](docs/datasheet.md) — instalación, operación y límites.
@@ -39,9 +93,9 @@ La detección depende del ángulo y de la luz. Con el corredor mal encuadrado ap
 - [`docs/REFERENCES.md`](docs/REFERENCES.md) — estándares, librerías y fuentes.
 - [`docs/index.html`](docs/index.html) — página del proyecto (GitHub Pages).
 
-## Alcance y honestidad
+## El proyecto en detalle
 
-## 🛰️ Vigía Caminante — Arduino UNO Q
+### 🛰️ Vigía Caminante — Arduino UNO Q
 
 ![versión](https://img.shields.io/badge/versi%C3%B3n-1.0.0-22c55e)
 ![placa](https://img.shields.io/badge/placa-Arduino%20UNO%20Q-00979D)

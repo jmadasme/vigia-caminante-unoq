@@ -156,6 +156,39 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 .rich .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
 .rich .card-grid .card{margin:0}
 
+
+.rich h3{margin:26px 0 8px}
+.rich p{margin:0 0 14px;color:var(--muted);line-height:1.7}
+.fail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:6px}
+.fail{background:rgba(11,34,43,.55);border:1px solid var(--line);border-radius:14px;padding:18px}
+.fail .v{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--warm,#D6A86A)}
+.fail h3{font-size:16px;margin:8px 0 6px}
+.fail p{font-size:14px;margin:0;color:var(--muted)}
+.rating-head{display:flex;align-items:center;gap:20px;margin:6px 0 18px;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:rgba(11,34,43,.55)}
+.rating-avg{font-family:var(--mono);font-size:40px;line-height:1;color:var(--accent)}
+.rating-avg small{font-size:14px;color:var(--muted)}
+.rating-head p{margin:4px 0 0;font-size:14px;color:var(--muted);max-width:70ch}
+.rating{display:grid;gap:2px}
+.rating-row{display:grid;grid-template-columns:165px minmax(90px,1fr) 48px;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.rating-row:last-child{border-bottom:0}
+.rating-name{font-size:13.5px;font-weight:600}
+.rating-bar{height:6px;border-radius:99px;background:rgba(148,190,200,.14);overflow:hidden}
+.rating-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.rating-score{font-family:var(--mono);font-size:12.5px;color:var(--accent);text-align:right}
+.rating-note{grid-column:2/-1;font-size:12.5px;color:var(--muted);margin-top:-4px}
+.faq{display:grid;gap:0;margin-top:4px}
+.faq details{border-bottom:1px solid var(--line);padding:14px 0}
+.faq summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"+";display:inline-block;width:18px;color:var(--accent);font-family:var(--mono)}
+.faq details[open] summary::before{content:"–"}
+.faq p{margin:10px 0 0 18px;font-size:14px;color:var(--muted)}
+@media(max-width:720px){
+  .fail-grid{grid-template-columns:1fr}
+  .rating-head{flex-direction:column;align-items:flex-start}
+  .rating-row{grid-template-columns:120px 1fr 44px}
+}
+
 </style>
 <link rel="stylesheet" href="assets/community.css?v=1">
 </head>
@@ -188,15 +221,7 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 
 <section class="stats"><div class="wrap stats-grid"><div class="stat"><div class="stat-num">1</div><div class="stat-label">versión</div></div><div class="stat"><div class="stat-num">10–14</div><div class="stat-label">fps</div></div><div class="stat"><div class="stat-num">55</div><div class="stat-label">ms latencia</div></div><div class="stat"><div class="stat-num">4</div><div class="stat-label">estados</div></div></div></section>
 
-<section class="section" id="proyecto"><div class="wrap">
-  <div class="section-head reveal"><div class="kicker">01 — El proyecto</div><h2>Qué resuelve</h2><p class="section-sub">Un servicio de visión que corre en la UNO Q y vigila un corredor central. Resta el fondo con MOG2, mide el crecimiento del contorno y el tiempo estimado de contacto, y publica el estado en una página con stream anotado y una API de configuración.</p></div>
-  <div class="two">
-    <div class="card reveal"><span class="tag">Problema</span><h3>El punto de partida</h3><p>En un pasillo concurrido, una persona que camina hacia la cámara no se distingue de una que solo pasa hasta que ya está encima.</p></div>
-    <div class="card reveal"><span class="tag">Solución</span><h3>La propuesta</h3><p>Mirar únicamente el corredor central, seguir el crecimiento del área ocupada en el tiempo y convertirlo en un semáforo con tiempo estimado de contacto.</p></div>
-  </div>
-</div></section>
-
-<section class="section" id="versiones"><div class="wrap">
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">El concepto</div><h2>Qué es y por qué existe</h2></div><div class="rich reveal"><p>Vigía Caminante es un servicio de visión que vigila un corredor central con una cámara IP y publica un semáforo de riesgo. Resta el fondo con MOG2, sigue el contorno dominante, estima el tiempo al contacto por el crecimiento del área y aplica histéresis sobre cuatro estados. La página muestra el stream anotado y una API HTTP permite consultar y ajustar umbrales sin reiniciar el servicio.</p><p>Está destinado a quienes necesitan una demostración comprensible de detección de aproximación en una placa con recursos limitados, no a un sistema de seguridad certificado. Su interés está en la trazabilidad: la bitácora registra trece hallazgos, tres auditorías y métricas sostenidas de 10,3 a 14 fps, con latencia mediana cercana a 55 ms. No identifica personas ni distingue quién se acerca; solo mide movimiento dentro de la franja configurada y declara sus límites.</p></div></div></section><section class="section" id="versiones"><div class="wrap">
   <div class="section-head reveal"><div class="kicker">02 — Versiones</div><h2>La historia, completa.</h2><p class="section-sub">Cada carpeta conserva una etapa del proyecto. No se borraron las anteriores: se pusieron en contexto.</p></div>
   <div class="versions"><article class="version reveal">
   <div class="version-top"><h3>vigia-caminante-unoq</h3><span class="count">35 archivos</span></div>
@@ -204,11 +229,11 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
   <a href="https://github.com/jmadasme/vigia-caminante-unoq/tree/main/versions/vigia-caminante-unoq" target="_blank" rel="noopener">Ver carpeta <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </article></div>
 </div></section>
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">01 — La idea</div><h2>El problema y la solución</h2><p class="section-sub">Qué resuelve y por qué está construido así.</p></div><div class="rich reveal"><div class="card-grid">
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">03 — La idea</div><h2>El problema y la solución</h2><p class="section-sub">Qué resuelve y por qué está construido así.</p></div><div class="rich reveal"><div class="card-grid">
 <div class="card"><h3>El problema</h3><div><div></div><p>En una feria la gente camina mirando pantallas, no el piso. Un chico con un teléfono grabando puede cruzarse con otro visitante sin verlo. La pregunta no es «¿qué objetos hay?» sino «¿estoy a punto de chocar con algo?».</p></div></div>
 <div class="card"><h3>La solución</h3><div><div></div><p>Un semáforo, no una lista: visión clásica (MOG2 + contornos + tracking) estima el riesgo de colisión frontal (cercanía, velocidad, looming, TTC) y lo reduce a un solo color en el borde de la pantalla. 100 % local y explicable en el stand.</p></div></div>
 </div></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">02 — El recorrido</div><h2>Cómo funciona, paso a paso</h2><p class="section-sub">Del frame del teléfono al color del borde.</p></div><div class="rich reveal"><div class="timeline">
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">04 — El recorrido</div><h2>Cómo funciona, paso a paso</h2><p class="section-sub">Del frame del teléfono al color del borde.</p></div><div class="rich reveal"><div class="timeline">
 <div class="step"><div class="step-n">01</div><h4>Captura</h4><div><p>Recibe frames MJPEG 1080×1920 del teléfono (IP Webcam) y los reduce a 320 px de ancho para analizar. El modo demo genera un caminante sintético para probar sin cámara.</p></div></div>
 <div class="step"><div class="step-n">02</div><h4>Sustracción de fondo</h4><div><p>MOG2 aprende la escena vacía y devuelve «lo que se movió»; cierre 7×7 + apertura 5×5 dejan contornos limpios, con un calentamiento de 5 frames al arrancar.</p></div></div>
 <div class="step"><div class="step-n">03</div><h4>Filtrado</h4><div><p>Área mínima 200 px y aspecto máximo 5:1. Un objeto que llena el cuadro no se filtra: es amenaza máxima por definición.</p></div></div>
@@ -216,13 +241,13 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 <div class="step"><div class="step-n">05</div><h4>Score de riesgo</h4><div><p>Cinco pesos por objeto — cercanía 25 %, velocidad 20 %, looming 25 %, área 15 %, TTC 15 % — se combinan en un score 0..1.</p></div></div>
 <div class="step"><div class="step-n">06</div><h4>Semáforo + overlay</h4><div><p>El máximo score pasa por un EMA y una histéresis (800 ms de rojo mínimo) que decide el color del borde; se dibujan cajas, etiquetas y HUD sobre el stream.</p></div></div>
 </div></div></div></section>
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">03 — Bajo el capó</div><h2>Cómo está construido</h2><p class="section-sub">Los componentes principales y cómo se conectan.</p></div><div class="rich reveal"><figure><img src="img/semaforo.svg" alt="El semáforo de riesgo: gris, verde, ámbar y rojo con sus umbrales" loading="lazy"><figcaption>El semáforo de riesgo: cuatro colores con histéresis para que el borde nunca parpadee.</figcaption></figure>
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">05 — Bajo el capó</div><h2>Cómo está construido</h2><p class="section-sub">Los componentes principales y cómo se conectan.</p></div><div class="rich reveal"><figure><img src="img/semaforo.svg" alt="El semáforo de riesgo: gris, verde, ámbar y rojo con sus umbrales" loading="lazy"><figcaption>El semáforo de riesgo: cuatro colores con histéresis para que el borde nunca parpadee.</figcaption></figure>
 <div class="card-grid">
 <div class="card"><h3>Teléfono (IP Webcam)</h3><div><p>Android transmite MJPEG 1080×1920 por WiFi (192.168.1.9:8080). El hilo de captura reconecta con backoff si se corta.</p></div></div>
 <div class="card"><h3>Servidor HTTP :8030</h3><div><p>ThreadingHTTPServer sirve la UI, /stream, /snapshot.jpg y la API JSON. Sin pip ni frameworks; no toca los puertos 8000/8010/8020.</p></div></div>
 <div class="card"><h3>Motor de visión</h3><div><p>MOG2 → contornos → tracker → score de 5 pesos → histéresis. Todo en un hilo que atrapa sus excepciones y sigue vivo.</p></div></div>
 </div></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">04 — Lo que lo hace distinto</div><h2>Decisiones de ingeniería</h2><p class="section-sub">Decisiones que hacen que el proyecto sea útil, mantenible y honesto.</p></div><div class="rich reveal"><div class="features">
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">06 — Lo que lo hace distinto</div><h2>Decisiones de ingeniería</h2><p class="section-sub">Decisiones que hacen que el proyecto sea útil, mantenible y honesto.</p></div><div class="rich reveal"><div class="features">
 <div class="feature"><h3>Visión clásica, no deep learning</h3><div><p>MOG2 + contornos + tracking en CPU: sin pesos descargados, sin GPU, sin nube. Pesa menos de 1 MB y es explicable en el stand.</p></div></div>
 <div class="feature"><h3>Semáforo con histéresis</h3><div><p>Cuatro umbrales + 800 ms de rojo mínimo: el borde no parpadea entre colores en cada frame, se mantiene estable y se lee de un vistazo.</p></div></div>
 <div class="feature"><h3>Explicable por diseño</h3><div><p>El borde es la señal; el score, el TTC y las cajas explican por qué cambió de color. En una feria, poder decir «está abajo, crece y baja rápido» vale más que 2 puntos de precisión.</p></div></div>
@@ -230,11 +255,11 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 <div class="feature"><h3>Modo demo</h3><div><p>Un caminante sintético recorre verde → ámbar → rojo → ámbar → verde en 10 s: sirve para verificar UI, overlay, stream e histéresis sin tocar la cámara real.</p></div></div>
 <div class="feature"><h3>Auto-recuperable</h3><div><p>Watchdog de señal (frame_age &gt; 2000 ms → gris) y cada hilo atrapa sus excepciones: un frame corrupto no tira el servicio de feria.</p></div></div>
 </div></div></div></section>
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">05 — Resultados medidos</div><h2>Lo que se mide, se verifica</h2><p class="section-sub">Sin «magia»: números reales tomados en la placa con el teléfono transmitiendo a 1080×1920.</p></div><div class="rich reveal"><figure><img src="img/semaforo.svg" alt="Los cuatro niveles de riesgo del Vigía Caminante" loading="lazy"><figcaption>Los cuatro niveles del semáforo y sus umbrales de score.</figcaption></figure>
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">07 — Resultados medidos</div><h2>Lo que se mide, se verifica</h2><p class="section-sub">Sin «magia»: números reales tomados en la placa con el teléfono transmitiendo a 1080×1920.</p></div><div class="rich reveal"><figure><img src="img/semaforo.svg" alt="Los cuatro niveles de riesgo del Vigía Caminante" loading="lazy"><figcaption>Los cuatro niveles del semáforo y sus umbrales de score.</figcaption></figure>
 <div class="card-grid">
 <div class="card"><h3>Métricas de referencia</h3><div><p>fps de proceso 10.3 – 14.0<br/>latencia mediana ≈ 55 ms<br/>RSS 190 – 230 MB (≈6 % de 3.6 GB)<br/>CPU 120 – 155 % de 400 %<br/>320 px analizar · 540 px mostrar<br/>JPEG calidad 70 · puerto 8030</p></div></div>
 </div></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">06 — Stack y arranque</div><h2>Con qué está construido</h2><p class="section-sub">Tecnologías y herramientas que sostienen el proyecto.</p></div><div class="rich reveal"><p>Arduino UNO Q Debian 13 Python 3.13 OpenCV NumPy MOG2 http.server unittest Sin pip ni frameworks web: stdlib + OpenCV + NumPy, ya preinstalados en el lado Linux (QCC711) de la UNO Q.</p>
+<section class="section"><div class="wrap"><div class="section-head reveal"><div class="kicker">08 — Stack y arranque</div><h2>Con qué está construido</h2><p class="section-sub">Tecnologías y herramientas que sostienen el proyecto.</p></div><div class="rich reveal"><p>Arduino UNO Q Debian 13 Python 3.13 OpenCV NumPy MOG2 http.server unittest Sin pip ni frameworks web: stdlib + OpenCV + NumPy, ya preinstalados en el lado Linux (QCC711) de la UNO Q.</p>
 <p>bash — vigia-caminante-unoq</p>
 <pre><span># En la placa: estado del servicio y logs</span>
 <span>$</span> ./scripts/servicio.sh status
@@ -242,15 +267,14 @@ h2{font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.04em;margin:
 <span>$</span> ./scripts/desplegar.sh
 <span># Estado en vivo del semáforo</span>
 <span>$</span> curl -s http://192.168.1.5:8030/api/estado</pre></div></div></section>
-<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">07 — Documentación</div><h2>Todo está escrito</h2><p class="section-sub">Cada decisión, cada límite y cada comando están documentados en el repositorio. Sin folletos: lo que funciona se muestra, lo que no, también.</p></div><div class="rich reveal"><div class="card-grid">
+<section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">09 — Documentación</div><h2>Todo está escrito</h2><p class="section-sub">Cada decisión, cada límite y cada comando están documentados en el repositorio. Sin folletos: lo que funciona se muestra, lo que no, también.</p></div><div class="rich reveal"><div class="card-grid">
 <a class="card" href=""><h3>Guía completa</h3><p>Qué es, cómo funciona, instalación y límites.</p></a>
 <a class="card" href=""><h3>Manual de operación</h3><p>Operación paso a paso, calibración y problemas.</p></a>
 <a class="card" href=""><h3>Guía de código</h3><p>Módulos, hilos, fórmulas, API y extensión.</p></a>
 <a class="card" href=""><h3>Runbook de la placa</h3><p>SSH, servicio, guardianes y checklist de feria.</p></a>
 <a class="card" href=""><h3>Bitácora</h3><p>Decisiones, tropiezos y lecciones aprendidas.</p></a>
 <a class="card" href=""><h3>Arduino UNO Q</h3><p>Todos los proyectos de la sección, con página y repo.</p></a>
-</div></div></div></section>
-<section class="cta"><div class="wrap"><div class="cta-box reveal">
+</div></div></div></section><section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">Lo que no funcionó</div><h2>Los tropiezos, documentados</h2><p class="section-sub">Las primeras versiones existen para que estos errores no se repitan: cada una dejó una decisión de diseño verificable.</p></div><div class="fail-grid reveal"><div class="fail"><div class="v">vigia-caminante-unoq</div><h3>Un objeto que llenaba el cuadro quedaba verde</h3><p>El filtro descartaba los contornos con área relativa mayor a 0,7 para evitar falsos positivos, de modo que una persona muy cerca desaparecía del semáforo. Se dejó de descartar por tamaño, se fijó 0,95 como umbral de amenaza y se añadió un calentamiento de cinco frames para el arranque de MOG2.</p></div><div class="fail"><div class="v">vigia-caminante-unoq</div><h3>El watchdog pisaba el estado recién escrito</h3><p>La rutina de vigilancia leía, modificaba y volvía a escribir el estado, sobrescribiendo actualizaciones frescas y produciendo parpadeos grises. Se implementó una operación compare-and-set, reemplazar_estado_si, que solo escribe si la versión leída sigue siendo la vigente. Es la incidencia I-011 de la bitácora.</p></div><div class="fail"><div class="v">vigia-caminante-unoq</div><h3>Configuración concurrente rompía invariantes</h3><p>Las actualizaciones de ajustes desde la API podían intercalarse y dejar el estado con umbrales incoherentes entre sí. Se centralizó la escritura en actualizar_ajustes_si, con un único lock, y se agregó una prueba de ocho hilos sincronizados con Barrier. Es la incidencia I-013.</p></div><div class="fail"><div class="v">vigia-caminante-unoq</div><h3>Deep learning descartado por el hardware</h3><p>Se evaluó un detector neuronal, pero la placa no tiene GPU ni acelerador, el disco ronda los 768 MB y la CPU no alcanzaba 10 fps a 1080×1920. Se optó por MOG2 por ser explicable y sostenible. La limitación está documentada: el sistema detecta movimiento, no personas.</p></div></div></div></section><section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">Ficha de evaluación</div><h2>Cómo se mide este proyecto</h2><p class="section-sub">Seis criterios con la misma escala en todo el catálogo, para comparar sin marketing.</p></div><div class="rating-head reveal"><div class="rating-avg">3.8<small>/5</small></div><div><strong>Madurez global</strong><p>Detector explicable y medido para un pasillo, con auditorías e incidencias documentadas. Adecuado para demostrar visión clásica en placa; insuficiente como sistema de seguridad real.</p></div></div><div class="rating reveal"><div class="rating-row"><div class="rating-name">Madurez</div><div class="rating-bar"><i style="width:80%"></i></div><div class="rating-score">4/5</div><div class="rating-note">38 pruebas, tres auditorías y trece hallazgos resueltos; sostiene de 10,3 a 14 fps en la placa.</div></div><div class="rating-row"><div class="rating-name">Reproducibilidad</div><div class="rating-bar"><i style="width:60%"></i></div><div class="rating-score">3/5</div><div class="rating-note">Depende de una cámara IP, del encuadre del corredor y de la luz; el despliegue evita pip y sudo.</div></div><div class="rating-row"><div class="rating-name">Documentación</div><div class="rating-bar"><i style="width:80%"></i></div><div class="rating-score">4/5</div><div class="rating-note">README, bitácora con las incidencias I-001 a I-013, datasheet y guía de desarrollador.</div></div><div class="rating-row"><div class="rating-name">Honestidad de límites</div><div class="rating-bar"><i style="width:100%"></i></div><div class="rating-score">5/5</div><div class="rating-note">Declara que no identifica personas, que no es un sistema certificado y que el deep learning no era viable.</div></div><div class="rating-row"><div class="rating-name">Valor demostrativo</div><div class="rating-bar"><i style="width:80%"></i></div><div class="rating-score">4/5</div><div class="rating-note">Convierte segmentación de fondo y tiempo al contacto en un semáforo comprensible, con latencia medida.</div></div><div class="rating-row"><div class="rating-name">Facilidad de despliegue</div><div class="rating-bar"><i style="width:60%"></i></div><div class="rating-score">3/5</div><div class="rating-note">Un script configura y arranca el servicio; exigen URL de cámara y franja del corredor antes de operar.</div></div></div></div></section><section class="section tight"><div class="wrap"><div class="section-head reveal"><div class="kicker">Preguntas típicas</div><h2>Lo que suelen preguntar</h2></div><div class="faq reveal"><details><summary>¿Identifica personas?</summary><p>No. Detecta movimiento en el corredor y estima riesgo; no reconoce caras ni identidades.</p></details><details><summary>¿Qué significa el ámbar?</summary><p>Que algo crece en el corredor y el tiempo estimado al contacto bajó del primer umbral.</p></details><details><summary>¿Cuánta CPU consume?</summary><p>Analiza a 320 px y sostiene 10–14 fps en la placa con 190–230 MB de RSS.</p></details><details><summary>¿Se puede usar de noche?</summary><p>Sí, si la cámara tiene visión nocturna; el detector necesita algún contraste para separar el fondo.</p></details></div></div></section><section class="cta"><div class="wrap"><div class="cta-box reveal">
   <div class="kicker">Siguiente paso</div><h2>¿Te animás?</h2>
   <p>Usá esta familia como base para vigía caminante. Está documentada para que puedas entenderla, ejecutarla y continuarla sin adivinar.</p>
   <div class="hero-actions" style="justify-content:center"><a class="btn btn-primary" href="https://github.com/jmadasme/vigia-caminante-unoq" target="_blank" rel="noopener">Abrir el repositorio <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="/arduino-unoq/">Ver más de Arduino</a></div>
